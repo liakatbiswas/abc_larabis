@@ -17,7 +17,12 @@ class ClientFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->name(),
+            'email' => $this->faker->unique()->userName(),
+            'username' => $this->faker->unique()->safeEmail(),
+            'phone' => $this->faker->phoneNumber(),
+            'country' => $this->faker->country(),
+            'thumbnail' => 'https://picsum.photos/300?random=.rand(1,22424)'
         ];
     }
 }
