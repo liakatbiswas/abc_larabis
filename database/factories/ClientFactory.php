@@ -22,7 +22,7 @@ class ClientFactory extends Factory
             'username' => $this->faker->unique()->safeEmail(),
             'phone' => $this->faker->phoneNumber(),
             'country' => $this->faker->country(),
-            'thumbnail' => 'https://picsum.photos/300?random=.rand(1,22424)'
+            'thumbnail' => 'https://picsum.photos/300?random=' . rand(1, 22424)
         ];
     }
 }
