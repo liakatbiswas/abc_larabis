@@ -1,8 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Clients') }}
-        </h2>
+        <div class="flex justify-between">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                {{ __('Clients') }}
+            </h2>
+            <a href="{{ route('client.create') }}"
+                class="border border-emerald-400 px-3 py-1 w-28 text-center text-gray-800 dark:text-gray-200 rounded-lg">
+                Add Client
+            </a>
+        </div>
     </x-slot>
 
     <div class="py-12">
@@ -19,6 +25,7 @@
                                 <th class="border py-2">Username</th>
                                 <th class="border py-2">Phone</th>
                                 <th class="border py-2">Country</th>
+                                <th class="border py-2">Status</th>
                                 <th class="border py-2">Active</th>
                             </tr>
                         </thead>
@@ -34,6 +41,7 @@
                                     <th class="border py-2 w-32 text-center"> {{ $client->username }}</th>
                                     <th class="border py-2 w-32 text-center"> {{ $client->phone }}</th>
                                     <th class="border py-2 w-32 text-center"> {{ $client->country }}</th>
+                                    <th class="border py-2 w-32 text-center"> {{ $client->status }}</th>
                                     <th class="border py-2 w-32 text-center">
                                         <a href="#" class="bg-emerald-400 text-white px-3 py-1">Edit</a>
                                         <a href="#" class="bg-emerald-400 text-white px-3 py-1">Delete</a>
@@ -44,7 +52,9 @@
 
                     </table>
 
-
+                    <div class="mt-5">
+                        {{ $clients->links() }}
+                    </div>
 
                 </div>
             </div>

@@ -12,7 +12,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::all();
+        // $clients = Client::all();
+        // $clients = Client::latest()->get();
+        $clients = Client::latest()->paginate(5);
         // return view('client.index', compact('clients'));
         return view('client.index')->with('clients', $clients);
     }
@@ -22,7 +24,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return view('client.create');
     }
 
     /**
@@ -30,7 +32,40 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'max:255'],
+            'username' => ['required', 'max:255', 'string', 'unique:clients'],
+            'email' => ['required', 'max:255', 'string', 'email', 'unique:clients'],
+            'phone' => ['max:20', 'string'],
+            'country' => ['required', 'max:80', 'string'],
+            'status' => ['required', 'string', 'not_in:none', 'in:active,inactive']
+
+        ]);
+
+        // object-oriented paradigm
+        /** $client = new Client();
+        $client->name = $request->name;
+        $client->username = $request->username;
+        $client->email = $request->email;
+        $client->phone = $request->phone;
+        $client->country = $request->country;
+        $client->status = $request->status;
+        $client->save();
+         */
+
+        Client::create([
+            'name' => $request->name,
+            'username' => $request->username,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'country' => $request->country,
+            'status' => $request->status
+        ]);
+
+
+        // Client::create($request->only('name', 'username', 'email', 'phone', 'country', 'status'));
+
+        return redirect()->route('client.index');
     }
 
     /**

@@ -18,8 +18,8 @@ class ClientFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->userName(),
-            'username' => $this->faker->unique()->safeEmail(),
+            'username' => $this->faker->unique()->userName(),
+            'email' => $this->faker->unique()->safeEmail(),
             'phone' => $this->faker->phoneNumber(),
             'country' => $this->faker->country(),
             'thumbnail' => 'https://picsum.photos/300?random=' . rand(1, 22424)
